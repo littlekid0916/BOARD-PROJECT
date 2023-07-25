@@ -26,6 +26,17 @@
   display: flex;
 }
 
+.search-board-list-nothing {
+  flex: 8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 100%;
+}
+
 .search-board-list {
   flex: 8;
 }
@@ -47,6 +58,17 @@
   line-height: 100%;
 }
 
+.search-relation-list-nothing {
+  height: 310px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 100%;
+}
+
 .relation-chip {
   display: inline-flex;
   margin-right: 12px;
@@ -63,4 +85,10 @@
 .relation-chip:hover {
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.15);
+}
+
+.search-pagination {
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
 }

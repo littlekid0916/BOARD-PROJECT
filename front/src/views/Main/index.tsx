@@ -5,20 +5,32 @@ import { CurrentListResponseDto, Top3ListResponseDto } from 'src/interfaces/resp
 import { currentBoardListMock, popularWordListMock, top3ListMock } from 'src/mocks';
 import BoardListItem from 'src/components/BoardListItem';
 import { useNavigate } from 'react-router-dom';
-import { COUNT_BY_PAGE, COUNT_BY_SECTION, PAGE_BY_SECTION } from 'src/constants';
-import { getPagination } from 'src/utils';
+import Pagination from 'src/components/Pagination';
+import { usePagination } from 'src/hooks';
 
+//        component       //
+// description: 메인 화면 컴포넌트 //
 export default function Main() {
 
+  //        function        //
+  // description: 페이지 이동을 위한 네비게이트 함수 //
   const navigator = useNavigate();
 
-  const [top3List, setTop3List] = useState<Top3ListResponseDto[]>([]);
-
-  useEffect(() => {
-    if (!top3List.length) setTop3List(top3ListMock);
-  }, []);
-
+  //        component       //
+  // description: 메인 화면의 상단 //
   const MainTop = () => {
+
+    //        state       //
+    // description: 인기 게시물 리스트 상태 //
+    const [top3List, setTop3List] = useState<Top3ListResponseDto[]>([]);
+  
+    //        effect        //
+    // description: 첫 시작 시 인기 게시물 데이터 불러오기 //
+    useEffect(() => {
+      if (!top3List.length) setTop3List(top3ListMock);
+    }, []);
+    
+    //        render        //
     return (
       <div className='main-top'>
         <div className='main-top-text-container'>
@@ -35,74 +47,38 @@ export default function Main() {
     )
   }
 
+  //        component       //
+  // description: 메인 화면의 하단 //
   const MainBottom = () => {
 
+    //        state       //
+    // description: 최신 게시물 리스트 상태 //
     const [currentList, setCurrentList] = useState<CurrentListResponseDto[]>([]);
+    // description: 인기 검색어 리스트 상태 //
     const [popularList, setPopularList] = useState<string[]>([]);
 
-    const [currentPage, setCurrentPage] = useState<number>(1);
-    const [currentSection, setCurrentSection] = useState<number>(1);
-    const [totalPage, setTotalPage] = useState<number[]>([]);
-    const [totalSection, setTotalSection] = useState<number>(1);
+    // description: 페이지네이션 관련 상태 및 함수 //
+    const { totalPage, currentPage, currentSection, onPageClickHandler, onNextClickHandler, onPreviousClickHandler, changeSection } = usePagination();
 
-    const [totalPageCount, setTotalPageCount] = useState<number>(0);
-    const [minPage, setMinPage] = useState<number>(0);
-    const [maxPage, setMaxPage] = useState<number>(0);
-
+    //        event handler       //
+    // description: 인기 검색어 클릭 이벤트 //
     const onPopularClickHandler = (word: string) => {
       navigator(`/search/${word}`);
     }
 
-    const onPageClickHandler = (page: number) => {
-      setCurrentPage(page);
-    }
-
-    const onPreviousClickHandler = () => {
-      // 한 페이지씩 이동
-      // if (currentPage != 1) setCurrentPage(currentPage - 1);
-
-      // 섹션 이동
-      // if (currentSection != 1) setCurrentSection(currentSection - 1);
-    
-      // 한 페이지씩 이동 + 섹션 이동
-      if (currentPage == 1) return;
-      if (currentPage == minPage) setCurrentSection(currentSection - 1);
-      setCurrentPage(currentPage - 1);
-    }
-
-    const onNextClickHandler = () => {
-      // 한 페이지씩 이동
-      // if (currentPage != totalPage.length) setCurrentPage(currentPage + 1);
-      
-      // 섹션 이동
-      // if (currentSection != totalSection) setCurrentSection(currentSection + 1);
-    
-      // 한 페이지씩 이동 + 섹션 이동
-      if (currentPage == totalPageCount) return;
-      if (currentPage == maxPage) setCurrentSection(currentSection + 1);
-      setCurrentPage(currentPage + 1);
-    }
-
-    useEffect(() => {
-
-      const boardCount = 72;
-
-      const { section, maxPage, minPage, totalPageCount } = getPagination(boardCount, currentSection);
-      setTotalSection(section);
-      setMinPage(minPage);
-      setMaxPage(maxPage);
-      setTotalPageCount(totalPageCount);
-
-      if (!currentList.length) setCurrentList(currentBoardListMock);
-      const pageList = [];
-      for (let page = minPage; page <= maxPage; page++) pageList.push(page);
-      setTotalPage(pageList);
-    }, [currentSection]);
-
+    //        effect        //
+    // description: 첫 시작 시 인기 검색어 리스트 불러오기 //
     useEffect(() => {
       if (!popularList.length) setPopularList(popularWordListMock);
     }, []);
 
+    // description: 현재 섹션이 바뀔 때마다 페이지 리스트 변경 및 최신 게시물 불러오기 //
+    useEffect(() => {
+      changeSection(72);
+      if (!currentList.length) setCurrentList(currentBoardListMock);
+    }, [currentSection]);
+
+    //        render        //
     return (
       <div className='main-bottom'>
         <div className='main-bottom-text'>최신 게시물</div>
@@ -119,23 +95,18 @@ export default function Main() {
             </div>
           </div>
         </div>
-        <div className='main-bottom-pagination'>
-          <div className='pagination-button' onClick={onPreviousClickHandler}>
-            <div className='pagination-left-icon'></div>
-            <div className='pagination-button-text'>이전</div>
-          </div>
-          <div className='pagination-text'>{'\|'}</div>
-          {totalPage.map((page) => (<div className={currentPage === page ? 'pagination-page-active' : 'pagination-page'} onClick={() => onPageClickHandler(page)}>{page}</div>))}
-          <div className='pagination-text'>{'\|'}</div>
-          <div className='pagination-button' onClick={onNextClickHandler}>
-            <div className='pagination-button-text'>다음</div>
-            <div className='pagination-right-icon'></div>
-          </div>
-        </div>
+        <Pagination 
+          totalPage={totalPage} 
+          currentPage={currentPage} 
+          onPageClickHandler={onPageClickHandler} 
+          onNextClickHandler={onNextClickHandler} 
+          onPreviousClickHandler={onPreviousClickHandler} 
+        />
       </div>
     )
   }
 
+  //        render        //
   return (
     <div id='main-wrapper'>
       <MainTop />

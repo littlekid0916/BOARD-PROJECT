@@ -162,6 +162,93 @@ export const searchBoardListMock = [
   }
 ];
 
+export const myPageBoardListMock = [
+  {
+    writerProfileImage: 'https://newsimg.sedaily.com/2023/05/10/29PIXQDV1Q_1.jpg',
+    writerNickName: '야호무야호',
+    writeDate: '2023. 07. 12.',
+    boardTitle: '나랑 같이 사과 먹을 사람?',
+    boardContent: '사과의 주요 향기는 30여종이며 에스테르 알콜 및 알데히드류가 많아 향기가 풍부하다. 비타민 C가 풍부하여 괴혈병 방지, 항산화 작용, 피부노화 방지, 감기 예방 및 면역력 증강에 도움을 주며, 비타민 B도 풍부하다. - 식이섬유 : 정장 작용, 장운동 원활, 변비예방에 좋다.',
+    boardImage: 'https://cdn.pixabay.com/photo/2016/09/20/07/25/food-1681977_1280.png',
+    commentCount: 10,
+    likeCount: 10,
+    viewCount: 10,
+    boardNumber: 1
+  },
+  {
+    writerProfileImage: 'https://newsimg.sedaily.com/2023/05/10/29PIXQDV1Q_1.jpg',
+    writerNickName: '야호무야호',
+    writeDate: '2023. 07. 12.',
+    boardTitle: '나랑 같이 사과 먹을 사람?',
+    boardContent: '사과의 주요 향기는 30여종이며 에스테르 알콜 및 알데히드류가 많아 향기가 풍부하다. 비타민 C가 풍부하여 괴혈병 방지, 항산화 작용, 피부노화 방지, 감기 예방 및 면역력 증강에 도움을 주며, 비타민 B도 풍부하다. - 식이섬유 : 정장 작용, 장운동 원활, 변비예방에 좋다.',
+    boardImage: 'https://cdn.pixabay.com/photo/2016/09/20/07/25/food-1681977_1280.png',
+    commentCount: 20,
+    likeCount: 20,
+    viewCount: 20,
+    boardNumber: 2
+  },
+  {
+    writerProfileImage: 'https://newsimg.sedaily.com/2023/05/10/29PIXQDV1Q_1.jpg',
+    writerNickName: '야호무야호',
+    writeDate: '2023. 07. 12.',
+    boardTitle: '나랑 같이 사과 먹을 사람?',
+    boardContent: '사과의 주요 향기는 30여종이며 에스테르 알콜 및 알데히드류가 많아 향기가 풍부하다. 비타민 C가 풍부하여 괴혈병 방지, 항산화 작용, 피부노화 방지, 감기 예방 및 면역력 증강에 도움을 주며, 비타민 B도 풍부하다. - 식이섬유 : 정장 작용, 장운동 원활, 변비예방에 좋다.',
+    boardImage: 'https://cdn.pixabay.com/photo/2016/09/20/07/25/food-1681977_1280.png',
+    commentCount: 30,
+    likeCount: 30,
+    viewCount: 30,
+    boardNumber: 3
+  },
+  {
+    writerProfileImage: 'https://newsimg.sedaily.com/2023/05/10/29PIXQDV1Q_1.jpg',
+    writerNickName: '야호무야호',
+    writeDate: '2023. 07. 12.',
+    boardTitle: '나랑 같이 사과 먹을 사람?',
+    boardContent: '사과의 주요 향기는 30여종이며 에스테르 알콜 및 알데히드류가 많아 향기가 풍부하다. 비타민 C가 풍부하여 괴혈병 방지, 항산화 작용, 피부노화 방지, 감기 예방 및 면역력 증강에 도움을 주며, 비타민 B도 풍부하다. - 식이섬유 : 정장 작용, 장운동 원활, 변비예방에 좋다.',
+    boardImage: 'https://cdn.pixabay.com/photo/2016/09/20/07/25/food-1681977_1280.png',
+    commentCount: 40,
+    likeCount: 40,
+    viewCount: 40,
+    boardNumber: 4
+  },
+  {
+    writerProfileImage: 'https://newsimg.sedaily.com/2023/05/10/29PIXQDV1Q_1.jpg',
+    writerNickName: '야호무야호',
+    writeDate: '2023. 07. 12.',
+    boardTitle: '나랑 같이 사과 먹을 사람?',
+    boardContent: '사과의 주요 향기는 30여종이며 에스테르 알콜 및 알데히드류가 많아 향기가 풍부하다. 비타민 C가 풍부하여 괴혈병 방지, 항산화 작용, 피부노화 방지, 감기 예방 및 면역력 증강에 도움을 주며, 비타민 B도 풍부하다. - 식이섬유 : 정장 작용, 장운동 원활, 변비예방에 좋다.',
+    boardImage: 'https://cdn.pixabay.com/photo/2016/09/20/07/25/food-1681977_1280.png',
+    commentCount: 50,
+    likeCount: 50,
+    viewCount: 50,
+    boardNumber: 5
+  },
+  {
+    writerProfileImage: 'https://newsimg.sedaily.com/2023/05/10/29PIXQDV1Q_1.jpg',
+    writerNickName: '야호무야호',
+    writeDate: '2023. 07. 12.',
+    boardTitle: '나랑 같이 사과 먹을 사람?',
+    boardContent: '사과의 주요 향기는 30여종이며 에스테르 알콜 및 알데히드류가 많아 향기가 풍부하다. 비타민 C가 풍부하여 괴혈병 방지, 항산화 작용, 피부노화 방지, 감기 예방 및 면역력 증강에 도움을 주며, 비타민 B도 풍부하다. - 식이섬유 : 정장 작용, 장운동 원활, 변비예방에 좋다.',
+    boardImage: 'https://cdn.pixabay.com/photo/2016/09/20/07/25/food-1681977_1280.png',
+    commentCount: 60,
+    likeCount: 60,
+    viewCount: 60,
+    boardNumber: 6
+  },
+  {
+    writerProfileImage: 'https://newsimg.sedaily.com/2023/05/10/29PIXQDV1Q_1.jpg',
+    writerNickName: '야호무야호',
+    writeDate: '2023. 07. 12.',
+    boardTitle: '나랑 같이 사과 먹을 사람?',
+    boardContent: '사과의 주요 향기는 30여종이며 에스테르 알콜 및 알데히드류가 많아 향기가 풍부하다. 비타민 C가 풍부하여 괴혈병 방지, 항산화 작용, 피부노화 방지, 감기 예방 및 면역력 증강에 도움을 주며, 비타민 B도 풍부하다. - 식이섬유 : 정장 작용, 장운동 원활, 변비예방에 좋다.',
+    boardImage: 'https://cdn.pixabay.com/photo/2016/09/20/07/25/food-1681977_1280.png',
+    commentCount: 70,
+    likeCount: 70,
+    viewCount: 70,
+    boardNumber: 7
+  }
+];
+
 export const popularWordListMock = ['안녕', '반가워', '아침', '점심', '저녁', '사과'];
 
 export const relationWordListMock = ['안녕', '반가워', '아침', '점심', '저녁', '사과'];
