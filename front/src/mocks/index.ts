@@ -1,4 +1,9 @@
-//! 게시판 리스트 아이템 목(임시) 데이터 //
+export const userMock = {
+  email: 'email@email.com',
+  nickname: '야호무야호',
+  profileImage: 'https://newsimg.sedaily.com/2023/05/10/29PIXQDV1Q_1.jpg'
+}
+
 export const boardListItemMock = {
   writerProfileImage: 'https://newsimg.sedaily.com/2023/05/10/29PIXQDV1Q_1.jpg',
   writerNickName: '야호무야호',
@@ -309,10 +314,121 @@ export const commentListItemMock = {
   writerProfileImage: 'https://newsimg.sedaily.com/2023/05/10/29PIXQDV1Q_1.jpg',
   writerNickName: '포차코',
   writeTime: '3분전',
-  comment: '포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다포차코 귀엽다 포차코 귀엽다'
+  comment: '포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다'
 }
+
+export const commentListMock = [
+  {
+    writerProfileImage: 'https://newsimg.sedaily.com/2023/05/10/29PIXQDV1Q_1.jpg',
+    writerNickName: '포차코',
+    writeTime: '3분전',
+    comment: '포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다'
+  },
+  {
+    writerProfileImage: 'https://newsimg.sedaily.com/2023/05/10/29PIXQDV1Q_1.jpg',
+    writerNickName: '포차코',
+    writeTime: '3분전',
+    comment: '포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다'
+  },
+  {
+    writerProfileImage: 'https://newsimg.sedaily.com/2023/05/10/29PIXQDV1Q_1.jpg',
+    writerNickName: '포차코',
+    writeTime: '3분전',
+    comment: '포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다'
+  },
+  {
+    writerProfileImage: 'https://newsimg.sedaily.com/2023/05/10/29PIXQDV1Q_1.jpg',
+    writerNickName: '포차코',
+    writeTime: '3분전',
+    comment: '포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다'
+  },
+  {
+    writerProfileImage: 'https://newsimg.sedaily.com/2023/05/10/29PIXQDV1Q_1.jpg',
+    writerNickName: '포차코',
+    writeTime: '3분전',
+    comment: '포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다'
+  },
+  {
+    writerProfileImage: 'https://newsimg.sedaily.com/2023/05/10/29PIXQDV1Q_1.jpg',
+    writerNickName: '포차코',
+    writeTime: '3분전',
+    comment: '포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다'
+  },
+  {
+    writerProfileImage: 'https://newsimg.sedaily.com/2023/05/10/29PIXQDV1Q_1.jpg',
+    writerNickName: '포차코',
+    writeTime: '3분전',
+    comment: '포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다'
+  },
+  {
+    writerProfileImage: 'https://newsimg.sedaily.com/2023/05/10/29PIXQDV1Q_1.jpg',
+    writerNickName: '포차코',
+    writeTime: '3분전',
+    comment: '포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다 포차코 귀엽다'
+  }
+]
 
 export const signInMock = {
   email: 'email@email.com',
   password: 'andigh1234'
+}
+
+export const boardDetailMock = {
+  writerProfileImage: 'https://i.pinimg.com/originals/57/d0/d5/57d0d5ab30d7b9bab035bf5048f23a80.png',
+  writerNickName: '야호무야호',
+  writerEmail: 'email@email.com',
+  writeDate: '2023. 07. 12.',
+  boardTitle: '오늘 아침 뭐 먹지?',
+  boardContent: '오늘 아침 뭐 먹지? 오늘 아침 뭐 먹지? 오늘 아침 뭐 먹지? 오늘 아침 뭐 먹지? 오늘 아침 뭐 먹지? 오늘 아침 뭐 먹지? 오늘 아침 뭐 먹지? 오늘 아침 뭐 먹지? 오늘 아침 뭐 먹지? 오늘 아침 뭐 먹지?',
+  boardImage: 'https://cdn.pixabay.com/photo/2019/07/13/15/54/ice-cream-4335122_960_720.png',
+  boardNumber: 1
+}
+
+export const likeListMock = [
+  {
+    likeUserProfileImage: 'https://newsimg.sedaily.com/2023/05/10/29PIXQDV1Q_1.jpg',
+    likeUserNickname: '포차코',
+    likeUserEmail : 'email@email.com'
+  },
+  {
+    likeUserProfileImage: 'https://newsimg.sedaily.com/2023/05/10/29PIXQDV1Q_1.jpg',
+    likeUserNickname: '포차코',
+    likeUserEmail : 'email@email.com'
+  },
+  {
+    likeUserProfileImage: 'https://newsimg.sedaily.com/2023/05/10/29PIXQDV1Q_1.jpg',
+    likeUserNickname: '포차코',
+    likeUserEmail : 'email@email.com'
+  },
+  {
+    likeUserProfileImage: 'https://newsimg.sedaily.com/2023/05/10/29PIXQDV1Q_1.jpg',
+    likeUserNickname: '포차코',
+    likeUserEmail : 'email@email.com'
+  },
+  {
+    likeUserProfileImage: 'https://newsimg.sedaily.com/2023/05/10/29PIXQDV1Q_1.jpg',
+    likeUserNickname: '포차코',
+    likeUserEmail : 'email@email.com'
+  },
+  {
+    likeUserProfileImage: 'https://newsimg.sedaily.com/2023/05/10/29PIXQDV1Q_1.jpg',
+    likeUserNickname: '포차코',
+    likeUserEmail : 'email@email.com'
+  },
+  {
+    likeUserProfileImage: 'https://newsimg.sedaily.com/2023/05/10/29PIXQDV1Q_1.jpg',
+    likeUserNickname: '포차코',
+    likeUserEmail : 'email@email.com'
+  },
+  {
+    likeUserProfileImage: 'https://newsimg.sedaily.com/2023/05/10/29PIXQDV1Q_1.jpg',
+    likeUserNickname: '포차코',
+    likeUserEmail : 'email@email.com'
+  }
+]
+
+export const boardUpdateMock = {
+  boardTitle: '나랑 같이 사과 먹을 사람?',
+  boardContent: '사과의 주요 향기는 30여종이며 에스테르 알콜 및 알데히드류가 많아 향기가 풍부하다. 비타민 C가 풍부하여 괴혈병 방지, 항산화 작용, 피부노화 방지, 감기 예방 및 면역력 증강에 도움을 주며, 비타민 B도 풍부하다. - 식이섬유 : 정장 작용, 장운동 원활, 변비예방에 좋다.',
+  boardImage: 'https://cdn.pixabay.com/photo/2016/09/20/07/25/food-1681977_1280.png'
 }

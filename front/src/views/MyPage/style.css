@@ -97,6 +97,7 @@
 }
 
 .my-page-bottom-container {
+  margin-bottom: 40px;
   display: flex;
 }
 

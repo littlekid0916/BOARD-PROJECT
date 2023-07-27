@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { getPagination } from 'src/utils';
 
 //        hook        //
@@ -55,8 +55,8 @@ const usePagination = () => {
 
   //        function        //
   // description: 현재 섹션이 변경될 떄 호출할 함수 //
-  const changeSection = (boardCount: number) => {
-    const { section, maxPage, minPage, totalPageCount } = getPagination(boardCount, currentSection);
+  const changeSection = (boardCount: number, countByPage: number) => {
+    const { section, maxPage, minPage, totalPageCount } = getPagination(boardCount, currentSection, countByPage);
     setTotalSection(section);
     setMinPage(minPage);
     setMaxPage(maxPage);

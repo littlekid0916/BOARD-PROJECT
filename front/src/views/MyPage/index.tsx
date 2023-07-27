@@ -1,19 +1,26 @@
 import { ChangeEvent, useRef, useState, useEffect } from 'react'
-import './style.css';
-import DefaultProflie from './asset/my_page_profile_default.png';
-import Pagination from 'src/components/Pagination';
-import { usePagination } from 'src/hooks';
+import { useNavigate } from 'react-router-dom';
 import { MyPageListResponseDto } from 'src/interfaces/response';
+import { usePagination } from 'src/hooks';
+import { useUserStore } from 'src/stores';
+import BoardListItem from 'src/components/BoardListItem';
+import Pagination from 'src/components/Pagination';
 import { myPageBoardListMock } from 'src/mocks';
 import { COUNT_BY_PAGE } from 'src/constants';
-import BoardListItem from 'src/components/BoardListItem';
-import { useNavigate } from 'react-router-dom';
+import './style.css';
+import DefaultProflie from './asset/my_page_profile_default.png';
 
 //        component       //
 // description: 마이페이지 화면 //
 export default function MyPage() {
   //        state       //
+  // description: 로그인한 사용자의 정보 상태 //
+  const { user } = useUserStore();
+
   //        function       //
+  // description: 화면 이동을 위한 네비게이트 함수 //
+  const navigator = useNavigate();
+
   //        event handler       //
 
   //        component       //
@@ -21,7 +28,6 @@ export default function MyPage() {
   const MyPageTop = () => {
     //        state       //
     // description: input 요소에 대한 참조용 상태 //
-    // description: useRef를 사용하여 HTML 요소를 JS 객체로 다룰 수 있음 //
     const fileInputRef = useRef<HTMLInputElement>(null);
     // description: 사용자 프로필 사진 URL 상태 //
     const [profileImageUrl, setProfileImageUrl] = useState<string>(DefaultProflie);
@@ -33,10 +39,6 @@ export default function MyPage() {
     //        function       //
 
     //        event handler       //
-    // description: 프로필 이미지 선택 시 파일 인풋창 열림 이벤트 //
-    const onProfileClickHandler = () => {
-      fileInputRef.current?.click();
-    }
     // description: 파일 인풋 변경 시 이미지 미리보기 //
     const onImageInputChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
       if(!event.target.files || !event.target.files.length) return;
@@ -48,10 +50,16 @@ export default function MyPage() {
     const onNicknameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
       setNickname(event.target.value);
     }
+    // description: 프로필 이미지 선택 시 파일 인풋창 열림 이벤트 //
+    const onProfileClickHandler = () => {
+      fileInputRef.current?.click();
+    }
     // description: 닉네임 변경 버튼 클릭 이벤트 //
     const onNicknameButtonHandler = () => {
       setNicknameChange(!nicknameChange);
     }
+
+    //        component       //
 
     //        effect        //
 
@@ -60,42 +68,41 @@ export default function MyPage() {
       <div className='my-page-top'>
         <div className='my-page-top-container'>
           <div className='my-page-top-profile-box'>
-            <div className='my-page-top-profile' style={{ backgroundImage: `url(${profileImageUrl})` }} onClick={onProfileClickHandler}></div>
+            <div className='my-page-top-profile' style={{ backgroundImage: `url(${user?.profileImage})` }} onClick={onProfileClickHandler}></div>
             <input type='file' style={{ display: 'none' }} ref={fileInputRef} accept='image/*' onChange={onImageInputChangeHandler} />
           </div>
           <div className='my-page-top-info-box'>
             <div className='my-page-info-nickname-container'>
               {nicknameChange ? (
-                <input className='my-page-info-nickname-input' type="text" value={nickname} onChange={onNicknameChangeHandler} size={nickname.length} />
+                <input className='my-page-info-nickname-input' type="text" value={user?.nickname} onChange={onNicknameChangeHandler} size={nickname.length} />
               ) : (
-                <div className='my-page-info-nickname'>{nickname}</div>
+                <div className='my-page-info-nickname'>{user?.nickname}</div>
               )}
               <div className='my-page-info-nickname-button' onClick={onNicknameButtonHandler}>
                 <div className='my-page-edit-icon'></div>
               </div>
             </div>
-            <div className='my-page-info-email'>email@email.com</div>
+            <div className='my-page-info-email'>{user?.email}</div>
           </div>
         </div>
       </div>
     );
   }
 
+  //        component       //
   // description: 마이페이지 하단 //
   const MyPageBottom = () => {
     //        state       //
+    // description: 페이지네이션과 관련된 상태 및 함수 //
+    const { totalPage, currentPage, currentSection, onPageClickHandler, onPreviousClickHandler, onNextClickHandler, changeSection } = usePagination();
     // description: 전체 게시물 리스트 상태 //
     const [myPageBoardList, setMyPageBoardList] = useState<MyPageListResponseDto[]>([]);
     // description: 전체 게시물 갯수 상태 //
     const [boardCount, setBoardCount] = useState<number>(0);
     // description: 현재 페이지에서 보여줄 게시물 리스트 상태 //
     const [pageBoardList, setPageBoardList] = useState<MyPageListResponseDto[]>([]);
-    // description: 페이지네이션과 관련된 상태 및 함수 //
-    const { totalPage, currentPage, currentSection, onPageClickHandler, onPreviousClickHandler, onNextClickHandler, changeSection } = usePagination();
 
     //        function       //
-    // description: 페이지 이동을 위한 네비게이트 함수 //
-    const navigator = useNavigate();
     // description: 현재 페이지의 게시물 리스트 분류 함수 //
     const getPageBoardList = (boardCount: number) => {
       const startIndex = COUNT_BY_PAGE * (currentPage - 1);
@@ -107,15 +114,18 @@ export default function MyPage() {
     }
 
     //        event handler       //
+    // description: 글쓰기 버튼 클릭 이벤트 //
     const onWriteButtonClickHandler = () => {
       navigator('/board/write');
     }
+
+    //        component       //
 
     //        effect        //
     // description: 화면 첫 로드시 게시물 리스트 불러오기 //
     useEffect(() => {
       setMyPageBoardList(myPageBoardListMock);
-      setBoardCount(0);
+      setBoardCount(myPageBoardListMock.length);
     }, []);
 
     // description: 현재 페이지가 바뀔 때마다 마이페이지 게시물 분류하기 //
@@ -125,7 +135,7 @@ export default function MyPage() {
 
     // description: 현재 섹션이 바뀔 때마다 페이지 리스트 변경 //
     useEffect(() => {
-      changeSection(myPageBoardListMock.length);
+      changeSection(myPageBoardListMock.length ,COUNT_BY_PAGE);
     }, [currentSection]);
 
     //        render        //
@@ -159,6 +169,12 @@ export default function MyPage() {
       </div>
     );
   }
+
+  //        effect        //
+  // description: 처음 마이페이지 접근시 로그인이 되어 있지 않으면 인증 페이지로 이동 //
+  useEffect(() => {
+    if (!user) navigator('/auth');
+  }, []);
 
   //        render        //
   return (

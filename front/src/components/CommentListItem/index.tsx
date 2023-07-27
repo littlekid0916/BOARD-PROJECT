@@ -1,11 +1,27 @@
-import React from 'react'
+import { CommentListResponseDto } from 'src/interfaces/response';
 import './style.css';
-import { commentListItemMock } from 'src/mocks';
 
-export default function CommentListItem() {
+interface Props {
+  item: CommentListResponseDto;
+}
 
-  const { writerProfileImage, writerNickName, writeTime, comment } = commentListItemMock;
+//        component        //
+// description: 댓글 리스트 아이템 컴포넌트 //
+export default function CommentListItem({ item }: Props) {
+
+  //        state       //
+  // description: 속성으로 받아오는 댓글 관련 상태 //
+  const { writerProfileImage, writerNickName, writeTime, comment } = item;
   
+  //        function        //
+
+  //        event handler       //
+
+  //        component       //
+
+  //        effect        //
+
+  //        render        //
   return (
     <div className='comment-list-item-box'>
       <div className='comment-list-item-writer'>
