@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { CurrentListResponseDto, Top3ListResponseDto } from 'src/interfaces/response';
 import { usePagination } from 'src/hooks';
 import Top3ListItem from 'src/components/Top3ListItem';
 import BoardListItem from 'src/components/BoardListItem';
 import Pagination from 'src/components/Pagination';
 import { currentBoardListMock, popularWordListMock, top3ListMock } from 'src/mocks';
-import { COUNT_BY_PAGE } from 'src/constants';
+import { COUNT_BY_PAGE, SEARCH_PATH } from 'src/constants';
 import './style.css';
 
 //        component       //
@@ -38,7 +39,15 @@ export default function Main() {
     //        effect        //
     // description: 첫 시작 시 인기 게시물 데이터 불러오기 //
     useEffect(() => {
-      if (!top3List.length) setTop3List(top3ListMock);
+
+      axios.get('url').
+        then((response) => {
+          setTop3List(response.data);
+        }).catch((error) => {
+          setTop3List(top3ListMock);
+        });
+
+      // if (!top3List.length) setTop3List(top3ListMock);
     }, []);
     
     //        render        //
@@ -75,7 +84,7 @@ export default function Main() {
     //        event handler       //
     // description: 인기 검색어 클릭 이벤트 //
     const onPopularClickHandler = (word: string) => {
-      navigator(`/search/${word}`);
+      navigator(SEARCH_PATH(word));
     }
 
     //        component       //
@@ -83,13 +92,28 @@ export default function Main() {
     //        effect        //
     // description: 첫 시작 시 인기 검색어 리스트 불러오기 //
     useEffect(() => {
-      if (!popularList.length) setPopularList(popularWordListMock);
+
+      axios.get('url')
+        .then((response) => {
+          setPopularList(response.data);
+        }).catch((error) => {
+          setPopularList(popularWordListMock);
+        });
+
     }, []);
 
     // description: 현재 섹션이 바뀔 때마다 페이지 리스트 변경 및 최신 게시물 불러오기 //
     useEffect(() => {
-      changeSection(72, COUNT_BY_PAGE);
-      if (!currentList.length) setCurrentList(currentBoardListMock);
+
+      axios.get('url')
+        .then((response) => {
+          changeSection(response.data.length, COUNT_BY_PAGE);
+          setCurrentList(response.data);
+        }).catch((error) => {
+          changeSection(72, COUNT_BY_PAGE);
+          setCurrentList(currentBoardListMock);
+        });
+
     }, [currentSection]);
 
     //        render        //

@@ -1,21 +1,25 @@
 import { ChangeEvent, useRef, useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { MyPageListResponseDto } from 'src/interfaces/response';
 import { usePagination } from 'src/hooks';
 import { useUserStore } from 'src/stores';
 import BoardListItem from 'src/components/BoardListItem';
 import Pagination from 'src/components/Pagination';
 import { myPageBoardListMock } from 'src/mocks';
-import { COUNT_BY_PAGE } from 'src/constants';
+import { AUTH_PATH, BOARD_WRITE_RATH, COUNT_BY_PAGE, MAIN_PATH, USER_PAGE_PATH } from 'src/constants';
 import './style.css';
 import DefaultProflie from './asset/my_page_profile_default.png';
 
 //        component       //
-// description: 마이페이지 화면 //
-export default function MyPage() {
+// description: 유저페이지 화면 //
+export default function UserPage() {
   //        state       //
+  // description: 유저 이메일 상태 //
+  const {userEmail} = useParams();
   // description: 로그인한 사용자의 정보 상태 //
   const { user } = useUserStore();
+  // description: 마이페이지 여부 상태 //
+  const [myPage, setMyPage] = useState<boolean>(false);
 
   //        function       //
   // description: 화면 이동을 위한 네비게이트 함수 //
@@ -26,6 +30,7 @@ export default function MyPage() {
   //        component       //
   // description: 마이페이지 상단 //
   const MyPageTop = () => {
+
     //        state       //
     // description: input 요소에 대한 참조용 상태 //
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -62,27 +67,38 @@ export default function MyPage() {
     //        component       //
 
     //        effect        //
+    // description: 유저 이메일 상태가 바뀔 때마다 실행 //
+    useEffect(() => {
+      if (!user) return;
+      const isMyPage = user?.email === userEmail;
+      if (isMyPage) {
+        if (user.profileImage) setProfileImageUrl(user?.profileImage);
+        setNickname(user?.nickname);
+      }
+    }, [userEmail]);
 
     //        render        //
     return (
       <div className='my-page-top'>
         <div className='my-page-top-container'>
           <div className='my-page-top-profile-box'>
-            <div className='my-page-top-profile' style={{ backgroundImage: `url(${user?.profileImage})` }} onClick={onProfileClickHandler}></div>
+            <div className='my-page-top-profile' style={{ backgroundImage: `url(${profileImageUrl})` }} onClick={onProfileClickHandler}></div>
             <input type='file' style={{ display: 'none' }} ref={fileInputRef} accept='image/*' onChange={onImageInputChangeHandler} />
           </div>
           <div className='my-page-top-info-box'>
             <div className='my-page-info-nickname-container'>
               {nicknameChange ? (
-                <input className='my-page-info-nickname-input' type="text" value={user?.nickname} onChange={onNicknameChangeHandler} size={nickname.length} />
+                <input className='my-page-info-nickname-input' type="text" value={nickname} onChange={onNicknameChangeHandler} size={nickname.length} />
               ) : (
-                <div className='my-page-info-nickname'>{user?.nickname}</div>
+                <div className='my-page-info-nickname'>{nickname}</div>
               )}
-              <div className='my-page-info-nickname-button' onClick={onNicknameButtonHandler}>
-                <div className='my-page-edit-icon'></div>
-              </div>
+              {myPage && (
+                <div className='my-page-info-nickname-button' onClick={onNicknameButtonHandler}>
+                  <div className='my-page-edit-icon'></div>
+                </div>
+              )}
             </div>
-            <div className='my-page-info-email'>{user?.email}</div>
+            <div className='my-page-info-email'>{userEmail}</div>
           </div>
         </div>
       </div>
@@ -116,7 +132,17 @@ export default function MyPage() {
     //        event handler       //
     // description: 글쓰기 버튼 클릭 이벤트 //
     const onWriteButtonClickHandler = () => {
-      navigator('/board/write');
+      navigator(BOARD_WRITE_RATH());
+    }
+    // description: 내 게시물로 가기 버튼 클릭 이벤트 //
+    const onMoveMyPageButtonClickHandler = () => {
+      if (!user) {
+        alert('로그인이 필요합니다.');
+        navigator(AUTH_PATH);
+        return;
+      }
+      if (!userEmail) return;
+      navigator(USER_PAGE_PATH(userEmail));
     }
 
     //        component       //
@@ -151,10 +177,17 @@ export default function MyPage() {
             <div className='my-page-bottom-board-list-nothing'>게시물이 없습니다.</div>
           )}
           <div className='my-page-bottom-write-box'>
-            <div className='my-page-bottom-write-button' onClick={onWriteButtonClickHandler}>
-              <div className='my-page-edit-icon'></div>
-              <div className='my-page-bottom-write-button-text'>글쓰기</div>
-            </div>
+            {myPage ? (
+              <div className='user-page-bottom-button' onClick={onWriteButtonClickHandler}>
+                <div className='my-page-edit-icon'></div>
+                <div className='user-page-bottom-button-text'>글쓰기</div>
+              </div>
+            ) : (
+              <div className='user-page-bottom-button'>
+                <div className='user-page-bottom-button-text' onClick={onMoveMyPageButtonClickHandler}>내 게시물로 가기</div>
+                <div className='user-page-right-arrow-icon'></div>
+              </div>
+            )}
           </div>
         </div>
         { boardCount !== 0 && (
@@ -171,10 +204,12 @@ export default function MyPage() {
   }
 
   //        effect        //
-  // description: 처음 마이페이지 접근시 로그인이 되어 있지 않으면 인증 페이지로 이동 //
+  // description: 유저 이메일 상태가 바뀔 때마다 실행 //
   useEffect(() => {
-    if (!user) navigator('/auth');
-  }, []);
+    if (!userEmail) navigator(MAIN_PATH);
+    const isMyPage = user?.email === userEmail;
+    setMyPage(isMyPage);
+  }, [userEmail]);
 
   //        render        //
   return (
